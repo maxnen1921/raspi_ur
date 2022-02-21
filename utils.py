@@ -51,6 +51,11 @@ def visualize(
     :param cy:
     :param cx:
   """
+
+  # draw coordinates origin
+  cv2.circle(image, (rpx, rpy), 5, (0, 0, 255), -1)
+  cv2.circle(image, (rpx, rpy), 15, (0, 0, 255), 2)
+
   for detection in detections:
     # Draw bounding_box
     start_point = detection.bounding_box.left, detection.bounding_box.top
@@ -68,8 +73,6 @@ def visualize(
     result_text = class_name + ' (' + str(probability) + ')'
     text_location = (_MARGIN + detection.bounding_box.left, _MARGIN + _ROW_SIZE + detection.bounding_box.top)
     cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN, _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
-    cv2.circle(image, (rpx, rpy), 5, (0, 0, 255), -1)
-    cv2.circle(image, (rpx, rpy), 15, (0, 0, 255), 2)
     cv2.circle(image, (cx, cy), 5, (255, 0, 0), -1)
     cv2.line(image, (cx, cy), (rpx, rpy), (255, 255, 0), 2)
 
