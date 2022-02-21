@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Main script to run the object detection routine."""
+import argparse
 import sys
 import time
 
@@ -26,12 +27,9 @@ import socket
 import datetime
 
 model = configSim.MODEL
-camera_id = configSim.CAMID
 width = configSim.FRAME_WIDTH
 height = configSim.FRAME_HIGHT
 num_threads = configSim.NUM_THREADS
-enable_edgetpu = configSim.EDGETPU
-ur = configSim.WITH_UR
 
 
 def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
@@ -139,8 +137,26 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
 
 
 def main():
-    run(model=model, camera_id=camera_id, width=width, height=height,
-        num_threads=num_threads, enable_edgetpu=enable_edgetpu, ur=ur)
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        '--cameraId', help='Id of camera.', required=False, type=int, default=configSim.CAMID)
+    parser.add_argument(
+        '--enableEdgeTPU',
+        help='Whether to run the model on EdgeTPU.',
+        action='store_true',
+        required=False,
+        default=configSim.EDGETPU)
+    parser.add_argument(
+        '--ur',
+        help='Whether to run with UR.',
+        action='store_true',
+        required=False,
+        default=configSim.WITH_UR)
+    args = parser.parse_args()
+
+    run(model=model, camera_id=int(args.cameraId), width=width, height=height,
+        num_threads=num_threads, enable_edgetpu=bool(args.enableEdgeTPU), ur=bool(args.ur))
 
 
 if __name__ == '__main__':
