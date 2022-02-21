@@ -17,7 +17,7 @@ NUM_THREADS = 4
 # Whether to run the model on EdgeTPU
 EDGETPU = False
 # Wehther to run with UR or without
-WITH_UR = True
+WITH_UR = False
 
 
 # Min score for bounding box
