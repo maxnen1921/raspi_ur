@@ -16,7 +16,7 @@ FRAME_HIGHT = 480
 # Number of CPU threads to run the model
 NUM_THREADS = 4
 # Whether to run the model on EdgeTPU
-EDGETPU = True
+EDGETPU = False
 # Wehther to run with UR or without
 WITH_UR = False
 
