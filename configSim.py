@@ -4,7 +4,8 @@ HOST = "192.168.112.1" # The remote host
 #HOST = "192.168.2.10" # The remote host
 PORT = 30011  # The same port as used by the server
 
-MODEL = "models/duplo_efficientdet_lite0_edgetpu.tflite"
+MODEL_EDGETPU = "models/duplo_efficientdet_lite0_edgetpu.tflite"
+MODEL_LITE = "models/duplo_efficientdet_lite0.tflite"
 
 # Id of camera
 CAMID = 0

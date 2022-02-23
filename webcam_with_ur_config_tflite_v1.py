@@ -26,13 +26,12 @@ import ur_with_config
 import socket
 import datetime
 
-model = configSim.MODEL
 width = configSim.FRAME_WIDTH
 height = configSim.FRAME_HIGHT
 num_threads = configSim.NUM_THREADS
 
 
-def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
+def run(camera_id: int, width: int, height: int, num_threads: int,
         enable_edgetpu: bool, ur: bool) -> None:
     """Continuously run inference on images acquired from the camera.
 
@@ -45,6 +44,11 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     enable_edgetpu: True/False whether the model is a EdgeTPU model.
     ur: wheter with UR or without
   """
+
+    if enable_edgetpu:
+        model = configSim.MODEL_EDGETPU
+    else:
+        model = configSim.MODEL_LITE
 
     # start socket connection if running with UR
     if ur:
@@ -155,7 +159,7 @@ def main():
         default=configSim.WITH_UR)
     args = parser.parse_args()
 
-    run(model=model, camera_id=int(args.cameraId), width=width, height=height,
+    run(camera_id=int(args.cameraId), width=width, height=height,
         num_threads=num_threads, enable_edgetpu=bool(args.enableEdgeTPU), ur=bool(args.ur))
 
 
