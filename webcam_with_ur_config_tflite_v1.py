@@ -34,6 +34,7 @@ def run(camera_id: int, width: int, height: int, num_threads: int,
 
     if enable_edgetpu:
         model = configSim.MODEL_EDGETPU
+        print("EDGETPU USED")
     else:
         model = configSim.MODEL_LITE
 
